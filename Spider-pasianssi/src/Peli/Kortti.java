@@ -1,5 +1,7 @@
 package Peli;
 
+import Rajapinnat.KorttiRajapinta;
+
 public class Kortti implements KorttiRajapinta {
     
     private Maa maa;
