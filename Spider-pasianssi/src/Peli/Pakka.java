@@ -19,20 +19,16 @@ public class Pakka implements PakkaRajapinta {
         this.pinot = pinot;
         this.pakka = new ArrayList<KorttiRajapinta>();
         luoPakka();
+        alustaPinot();
     }
     
-    // Testaamista vasten Pakka-luokka, jonka ei tarvitse tietää pinoista.
+    // Testaamista vasten konstruktori, jonka ei tarvitse tietää pinoista.
     public Pakka(Vaikeusaste vaikeusaste) {
         this.vaikeusaste = vaikeusaste;
         this.pakka = new ArrayList<KorttiRajapinta>();
         luoPakka();
     }
-    
-    // Palauttaa listan pakan korteista.
-    @Override
-    public ArrayList<KorttiRajapinta> getPakka() {
-        return pakka;
-    }
+
     
     // Jakaa pinojen päälle yhden kortin.
     // Kortit luonnollisesti poistuvat pakasta.
@@ -51,9 +47,20 @@ public class Pakka implements PakkaRajapinta {
         }
         return true;
     }
-
+    
+    // Palauttaa true, jos pakka on tyhjä.
     @Override
-    public void alustaPinot() {
+    public boolean onTyhja() {
+        return pakka.isEmpty();
+    }
+    
+    // TESTAAMISEEN: palauttaa pakan kortit ArrayListana.
+    public ArrayList<KorttiRajapinta> getPakka() {
+        return pakka;
+    }
+
+    // Alustaa pinot pelikuntoon lisäämällä aloitustilannetta vastaavat kortit.
+    private void alustaPinot() {
         Iterator<KorttiRajapinta> pakkaIteraattori = pakka.iterator();
         KorttiRajapinta seuraavaKortti;
         
@@ -75,6 +82,10 @@ public class Pakka implements PakkaRajapinta {
         }
     }
     
+    // Luo pakkaan kaikki kortit vaikeusasteen mukaan, yhteensä kahdeksan sarjaa:
+    // HELPPO: Kahdeksan sarjaa PATAA.
+    // NORMAALI: Neljä sarjaa PATAA ja HERTTAA.
+    // VAIKEA: Jokaista maata kaksi sarjaa.
     private void luoPakka() {
         
         if(vaikeusaste == Vaikeusaste.HELPPO) {
@@ -100,6 +111,7 @@ public class Pakka implements PakkaRajapinta {
         Collections.shuffle(pakka);
     }
     
+    // Luo pakkaan saman maan kortit ässästä kuninkaaseen.
     private void luoSarjaKortteja(Maa maa) {
         for(int i = 1; i <= 13; i++) {
             pakka.add(new Kortti(maa, i));
