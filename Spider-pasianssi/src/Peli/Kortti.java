@@ -36,7 +36,32 @@ public class Kortti implements KorttiRajapinta {
     
     @Override
     public String toString() {
-        return maa.toString() + arvo;
+        String jono = "";
+        
+        if(nakyvyys == false) {
+            jono += "\u266F";
+            
+        }   else {
+            jono += maa.toString();
+
+            if(arvo == 11) {
+                jono += "J";
+
+            }   else if(arvo == 12) {
+                jono += "D";
+
+            }   else if(arvo == 13) {
+                jono += "K";
+
+            }   else if(arvo == 10) {
+                jono += "10";
+
+            }   else {
+                jono += arvo + "";
+            }
+        }
+        
+        return String.format("%-4s", jono);
     }
     
 }

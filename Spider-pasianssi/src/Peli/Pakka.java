@@ -2,50 +2,18 @@ package Peli;
 
 import Rajapinnat.KorttiRajapinta;
 import Rajapinnat.PakkaRajapinta;
-import Rajapinnat.PinoRajapinta;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 public class Pakka implements PakkaRajapinta {
     
     private ArrayList<KorttiRajapinta> pakka;
     private Vaikeusaste vaikeusaste;
-    private List<PinoRajapinta> pinot;
     
-    public Pakka(Vaikeusaste vaikeusaste, List<PinoRajapinta> pinot) {
-        this.vaikeusaste = vaikeusaste;
-        this.pinot = pinot;
-        this.pakka = new ArrayList<KorttiRajapinta>();
-        luoPakka();
-        alustaPinot();
-    }
-    
-    // Testaamista vasten konstruktori, jonka ei tarvitse tietää pinoista.
     public Pakka(Vaikeusaste vaikeusaste) {
         this.vaikeusaste = vaikeusaste;
         this.pakka = new ArrayList<KorttiRajapinta>();
         luoPakka();
-    }
-
-    
-    // Jakaa pinojen päälle yhden kortin.
-    // Kortit luonnollisesti poistuvat pakasta.
-    @Override
-    public boolean jaa() {
-        if(pakka.isEmpty()) {
-            return false;
-        }
-        
-        Iterator<KorttiRajapinta> pakkaIteraattori = pakka.iterator();
-        
-        for(PinoRajapinta pino: pinot) {
-            KorttiRajapinta seuraavaKortti = pakkaIteraattori.next();
-            pino.lisaa(seuraavaKortti);
-            pakka.remove(seuraavaKortti);
-        }
-        return true;
     }
     
     // Palauttaa true, jos pakka on tyhjä.
@@ -54,32 +22,23 @@ public class Pakka implements PakkaRajapinta {
         return pakka.isEmpty();
     }
     
+    // Palauttaa pakasta KorttiRajapinnan toteuttavan kortin poistaen sen samalla.
+    @Override
+    public KorttiRajapinta annaKortti() {
+        KorttiRajapinta kortti = pakka.get(pakka.size()-1);
+        pakka.remove(pakka.size()-1);
+        return kortti;
+    }
+    
     // TESTAAMISEEN: palauttaa pakan kortit ArrayListana.
     public ArrayList<KorttiRajapinta> getPakka() {
-        return pakka;
-    }
-
-    // Alustaa pinot pelikuntoon lisäämällä aloitustilannetta vastaavat kortit.
-    private void alustaPinot() {
-        Iterator<KorttiRajapinta> pakkaIteraattori = pakka.iterator();
-        KorttiRajapinta seuraavaKortti;
+        ArrayList<KorttiRajapinta> uusiPakka = new ArrayList<KorttiRajapinta>();
         
-        // Kaikkiin pinoihin lisätään pakasta viisi korttia. 
-        // Kortit luonnollisesti poistuvat pakasta.
-        for(int i = 0; i < 5; i++) {
-            for(PinoRajapinta pino: pinot) {
-                seuraavaKortti = pakkaIteraattori.next();
-                pino.lisaa(seuraavaKortti);
-                pakka.remove(seuraavaKortti);
-            }
+        for(KorttiRajapinta kortti: pakka) {
+            uusiPakka.add(kortti);
         }
         
-        // Neljään pinoon lisätään kuudes kortti.
-        for(int i = 0; i < 4; i++) {
-            seuraavaKortti = pakkaIteraattori.next();
-            pinot.get(i).lisaa(seuraavaKortti);
-            pakka.remove(seuraavaKortti);
-        }
+        return uusiPakka;
     }
     
     // Luo pakkaan kaikki kortit vaikeusasteen mukaan, yhteensä kahdeksan sarjaa:
