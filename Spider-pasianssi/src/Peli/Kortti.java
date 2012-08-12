@@ -20,6 +20,30 @@ public class Kortti implements KorttiRajapinta {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Kortti other = (Kortti) obj;
+        if (this.maa != other.maa) {
+            return false;
+        }
+        if (this.arvo != other.arvo) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
     public int getArvo() {
         return arvo;
     }
@@ -30,8 +54,8 @@ public class Kortti implements KorttiRajapinta {
     }
 
     @Override
-    public void setNakyvyys(boolean haluttu) {
-        nakyvyys = haluttu;
+    public void setNakyvaksi() {
+        nakyvyys = true;
     }
     
     @Override
