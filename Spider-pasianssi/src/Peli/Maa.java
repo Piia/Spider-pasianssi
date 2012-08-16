@@ -1,5 +1,10 @@
 package Peli;
 
+/**
+ * Maa esittää länsimaisen korttipakan sisältämät neljä maata.
+ * @author Piia
+ */
+
 public enum Maa {
     
     HERTTA,
@@ -8,6 +13,10 @@ public enum Maa {
     PATA;
     
     
+    /**
+     * Palauttaa tekstikäyttöliitymän tulostukseen maan mukaisen merkin.
+     * @return 
+     */
     public String toString() {
         if(this == HERTTA) {
             return "\u2661";

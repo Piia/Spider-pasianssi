@@ -2,6 +2,13 @@ package Peli;
 
 import Rajapinnat.KorttiRajapinta;
 
+/**
+ * Kortti on yksinkertainen luokka, jonka attribuutteina ovat maa, arvo ja 
+ * nakyvyys.
+ * 
+ * @author Piia
+ */
+
 public class Kortti implements KorttiRajapinta {
     
     private Maa maa;
@@ -14,11 +21,20 @@ public class Kortti implements KorttiRajapinta {
         this.nakyvyys = false;
     }
 
+    /**
+     * Palauttaa kortin maan.
+     * @return 
+     */
     @Override
     public Maa getMaa() {
         return maa;
     }
 
+    /**
+     * Equals-metodi Netbeansin generoimana. Lähinnä testausta varten.
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -38,21 +54,36 @@ public class Kortti implements KorttiRajapinta {
     }
 
 
+    /**
+     * Palauttaa kortin arvon.
+     * @return 
+     */
     @Override
     public int getArvo() {
         return arvo;
     }
 
+    /**
+     * Palauttaa nakyvyys-attibuutin arvon.
+     * @return 
+     */
     @Override
     public boolean getNakyvyys() {
         return nakyvyys;
     }
 
+    /**
+     * Asettaa nakyvyys-attribuutin arvoksi true.
+     */
     @Override
     public void setNakyvaksi() {
         nakyvyys = true;
     }
     
+    /**
+     * Palauttaa tekstikäyttöliittymän vaatimukset täyttävän merkkijonoesityksen.
+     * @return 
+     */
     @Override
     public String toString() {
         String jono = "";
