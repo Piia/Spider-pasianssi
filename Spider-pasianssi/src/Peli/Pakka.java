@@ -45,6 +45,16 @@ public class Pakka implements PakkaRajapinta {
     }
     
     /**
+     * Palauttaa kokonaisluvun, joka kertoo montako kertaa pakasta voi vielä 
+     * jakaa pinoihin.
+     * @return 
+     */
+    @Override
+    public int montaJakoa() {
+        return pakka.size()/10;
+    }
+    
+    /**
      * LÄHINNÄ TESTAAMISEEN: palauttaa pakan kortit ArrayListana.
      * @return 
      */
